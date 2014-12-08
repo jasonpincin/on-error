@@ -12,3 +12,5 @@ module.exports = function onError (errHandler, options, cb) {
         return cb.apply(cb, Array.prototype.slice.call(arguments, 1))
     }
 }
+
+module.exports.emit = require('emit-error')

@@ -12,6 +12,7 @@ test('on-error', function (t) {
     }
     var errorCalls = []
 
+    t.equal(typeof onError.emit, 'function', '.emit should be a function')
     t.notOk(onError(handleIt, callback)(new Error('error 1')), 'should return undefined on error without alwaysCall')
     t.deepEqual(onError(handleIt, {alwaysCall:true}, callback)(new Error('error 2')), [new Error('error 2')], 'should return args on error with alwaysCall')
     t.deepEqual(onError(handleIt, callback)(null, 1, 2), [1, 2], 'should return args on no error')

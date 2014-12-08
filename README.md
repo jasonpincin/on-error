@@ -5,7 +5,8 @@
 [![NPM version](https://badge.fury.io/js/on-error.png)](http://badge.fury.io/js/on-error)
 [![Davis Dependency Status](https://david-dm.org/jasonpincin/on-error.png)](https://david-dm.org/jasonpincin/on-error)
 
-Execute error handler instead of, or in addition to callback, when 1st callback argument is truthy
+Handle callback errors by executing an error handler function, or emitting the error, instead of or in 
+addition to executing the callback.
 
 ## example
 
@@ -19,7 +20,10 @@ function fail (cb) {
 function succeed (cb) {
     cb(null, 'success')
 }
+```
 
+Using error handler function:
+```
 function handleIt (err) {
     console.error(err)
 }
@@ -36,6 +40,18 @@ fail(onError(handleIt, {alwaysCall: true}, function (err, status) {
 succeed(onError(handleIt, function (status) {
     // Gets called with status of success
     console.log(status)
+}))
+```
+
+Using emitter:
+```
+var EventEmitter = require('events').EventEmitter
+var emitter = new EventEmitter().on('error', function (err) {
+    console.error(err)
+})
+
+fail(onError.emit(emitter, function (status) {
+    console.log('will not see this')
 }))
 ```
 
@@ -60,6 +76,11 @@ called with a non-falsey 1st argument.
 - alwaysCall: `true` or `false` - if true, the provided callback `cb` will always be called (and include 
   the 1st argument), otherwise it will only be called when a the first argument is falsey (and without the 
   1st argument)
+
+### var wrappedCb = onError.emit(emitter [, options, cb])
+
+Same behaviour as above, except errors will be emitted to `emitter` instead of passed to an error handler 
+function. All other options and arguments are the same.
 
 
 ## testing
