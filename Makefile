@@ -52,11 +52,3 @@ endif
 	$(if $(filter-out tap, $(reporter)), @printf $(cc_red),)
 	$(if $(grep),,@if [ -s coverage/error ]; then echo; grep ERROR coverage/error; echo; exit 1; fi)
 	$(if $(filter-out tap, $(reporter)), @printf $(cc_normal),)
-
-benchmark:
-	@echo
-	@date
-	$(if $(grep), @echo "Running perf files that match pattern: $(grep)",)
-	@echo "--------------------------------------------------------------"
-	@PERFS=`find ./perf -name "*.js" -type f -maxdepth 1 | grep ""$(grep)`; for PERF in $$PERFS; do node $$PERF; done 
-	@echo "--------------------------------------------------------------"
