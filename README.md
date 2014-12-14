@@ -1,8 +1,8 @@
 # on-error
 
+[![NPM version](https://badge.fury.io/js/on-error.png)](http://badge.fury.io/js/on-error)
 [![Build Status](https://travis-ci.org/jasonpincin/on-error.svg?branch=master)](https://travis-ci.org/jasonpincin/on-error)
 [![Coverage Status](https://coveralls.io/repos/jasonpincin/on-error/badge.png?branch=master)](https://coveralls.io/r/jasonpincin/on-error?branch=master)
-[![NPM version](https://badge.fury.io/js/on-error.png)](http://badge.fury.io/js/on-error)
 [![Davis Dependency Status](https://david-dm.org/jasonpincin/on-error.png)](https://david-dm.org/jasonpincin/on-error)
 
 Handle callback errors by executing an error handler function, or emitting the error, instead of or in 
