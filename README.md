@@ -10,7 +10,7 @@ addition to executing the callback.
 
 ## example
 
-```
+```javascript
 var onError = require('on-error')
 
 function fail (cb) {
@@ -57,9 +57,9 @@ fail(onError.emit(emitter, function (status) {
 
 ## api
 
-### onError
-
-`var onError = require('on-error')`
+```javascript
+var onError = require('on-error')
+```
 
 ### var wrappedCb = onError(errHandler [, options, cb])
 
