@@ -5,53 +5,37 @@
 [![Coverage Status](https://coveralls.io/repos/jasonpincin/on-error/badge.png?branch=master)](https://coveralls.io/r/jasonpincin/on-error?branch=master)
 [![Davis Dependency Status](https://david-dm.org/jasonpincin/on-error.png)](https://david-dm.org/jasonpincin/on-error)
 
-Handle callback errors by executing an error handler function, or emitting the error, instead of or in 
-addition to executing the callback.
+Handle callback errors without the `if` blocks. 
+
+On error, execute separate error handler function, or emit it. On no error, execute regular callback  
+(with or without error stripped).
 
 ## example
 
 ```javascript
-var onError = require('on-error')
-
-function fail (cb) {
-    cb(new Error('failed'))
-}
-
-function succeed (cb) {
-    cb(null, 'success')
-}
-```
-
-Using error handler function:
-```
-function handleIt (err) {
-    console.error(err)
-}
-
-fail(onError(handleIt, function (status) {
-    console.log('will not see this')
+// if error handleIt, otherwise...
+doSomething(onError(handleIt).otherwise(function (message) {
+    console.log('will see this: %s', message)
 }))
 
-fail(onError(handleIt, {alwaysCall: true}, function (err, status) {
-    // When always call specified, err is passed
-    console.log('will see this')
+failToDoSomething(onError(handleIt).otherwise(function (message) {
+    console.log('will NOT see this: %s', message)
 }))
 
-succeed(onError(handleIt, function (status) {
-    // Gets called with status of success
-    console.log(status)
+// if error handleIt, and always...
+failToDoSomething(onError(handleIt).always(function (message) {
+    console.log('will see this too: %s', message)
 }))
-```
 
-Using emitter:
-```
-var EventEmitter = require('events').EventEmitter
-var emitter = new EventEmitter().on('error', function (err) {
-    console.error(err)
-})
+// if error handleIt, and always (include error for always func)...
+failToDoSomething(onError(handleIt).alwaysWithError(function (err, message) {
+    console.log('will see this too (with the error): %s, %s', err, message)
+}))
 
-fail(onError.emit(emitter, function (status) {
-    console.log('will not see this')
+// maybe we want to emit the error instead...
+var emitter = new EventEmitter().on('error', console.log)
+failToDoSomething(onError.emit(emitter).otherwise(function (message) {
+    // will not get here
 }))
 ```
 
@@ -61,48 +45,43 @@ fail(onError.emit(emitter, function (status) {
 var onError = require('on-error')
 ```
 
-### var wrappedCb = onError(errHandler [, options, cb])
+### onError(cb)
 
-Returns a function that when called with a truthy first argument, will execute the errHandler
-with the 1st (error) argument supplied to the wrappedCb. If the option `alwaysCall` is define, 
-the provided `cb` will be executed in all cases with all arguments supplied to `wrappedCb`, otherwise 
-if the 1st argument to `wrappedCb` is falsey, the supplied `cb` will be executed with all but the 
-1st argument supplied to `wrappedCb`.
+Returns a function that when called with a truthy first argument, will execute `cb` with said 
+argument.
 
-If no callback `cb` is provided, then the generated callback will simply execute `errHandler` when 
-called with a non-falsey 1st argument.
+### onError.emit(emitter)
 
-*options:*
-- alwaysCall: `true` or `false` - if true, the provided callback `cb` will always be called (and include 
-  the 1st argument), otherwise it will only be called when a the first argument is falsey (and without the 
-  1st argument)
+Returns a function that when called with a truthy first argument, will emit `error` on the provided
+event `emitter` with said argument.
 
-### var wrappedCb = onError.emit(emitter [, options, cb])
+### onError(cb1).otherwise(cb2)
 
-Same behaviour as above, except errors will be emitted to `emitter` instead of passed to an error handler 
-function. All other options and arguments are the same.
+Returns a function that when called with a truthy first argument, will execute `cb1` with said 
+argument. When executed with a non-truthy 1st argument, `cb2` will instead be executed with 
+the error argument stripped.
 
+`.otherwise` may always be chained from `onError.emit()`
+
+### onError(cb1).always(cb2)
+
+Returns a function that when called with a truthy first argument, will execute `cb1` with said 
+argument. In addition, `cb2` will always be executed with the error argument stripped.
+
+`.always` may always be chained from `onError.emit()`
+
+### onError(cb1).alwaysWithError(cb2)
+
+Returns a function that when called with a truthy first argument, will execute `cb1` with said 
+argument. In addition, `cb2` will always be executed with the error argument in-tact.
+
+`.alwaysWithError` may always be chained from `onError.emit()`
 
 ## testing
 
 `npm test [--dot | --spec] [--coverage]`
 
-### options
+Alternatively, only run test files matching a certain pattern by prefixing the command 
+with `grep=pattern`. Example: `grep=init npm test`
 
-* `--dot` - output test results as dots instead of tap
-* `--spec` - output test results as spec instead of tap
-* `--coverage` - display text cover report
-  
-
-### patterns
-
-Only run test files matching a certain pattern by prefixing the 
-test command with `grep=pattern`. Example:
-
-```
-grep=connect npm test --dot
-```
-
-### html coverage report
-
-Open it with `npm run view-cover` or `npm run vc`
+Open an html coverage report after running tests with `npm run view-cover` or `npm run vc`
