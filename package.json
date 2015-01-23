@@ -1,7 +1,7 @@
 {
   "name": "on-error",
   "version": "2.0.0",
-  "description": "Execute error handler instead of, or in addition to callback, when 1st callback argument is truthy",
+  "description": "Handle callback errors without the if blocks.",
   "main": "index.js",
   "scripts": {
     "test": "make test",
@@ -16,7 +16,10 @@
   },
   "keywords": [
     "error",
-    "callback"
+    "callback",
+    "emit",
+    "event",
+    "emitter"
   ],
   "license": "MIT",
   "bugs": {
