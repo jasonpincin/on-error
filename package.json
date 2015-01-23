@@ -40,6 +40,5 @@
     "tape": "~2.12.3"
   },
   "dependencies": {
-    "emit-error": "^2.0.0"
   }
 }
