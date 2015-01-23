@@ -1,6 +1,6 @@
 {
   "name": "on-error",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Execute error handler instead of, or in addition to callback, when 1st callback argument is truthy",
   "main": "index.js",
   "scripts": {
