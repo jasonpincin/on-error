@@ -49,6 +49,9 @@ var emitter = new EventEmitter().on('error', console.log)
 failToDoSomething(onError.emit(emitter).otherwise(function (message) {
     // will not get here
 }))
+
+// or, *gasp*, chain to a promise
+doSomething(onError(reject).otherwise(resolve))
 ```
 
 ## api
