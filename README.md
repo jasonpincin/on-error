@@ -5,15 +5,27 @@
 [![Coverage Status](https://coveralls.io/repos/jasonpincin/on-error/badge.png?branch=master)](https://coveralls.io/r/jasonpincin/on-error?branch=master)
 [![Davis Dependency Status](https://david-dm.org/jasonpincin/on-error.png)](https://david-dm.org/jasonpincin/on-error)
 
-Handle callback errors without the `if` blocks. 
+Generate error-first callback handlers naturally. 
 
-On error, execute separate error handler function, or emit it. On no error, execute regular callback  
-(with or without error stripped).
+Handle errors via a dedicated error handler function, or by emitting them. 
+Optionally invoke a 2nd function on no error, or regardless of error.
 
-## example
+Potentially reduce the number of branches needing tests.
+
+## examples
 
 ```javascript
-// if error handleIt, otherwise...
+// error handler
+function handleIt (err) {}
+
+// just do something on error
+failToDoSomething(onError(handleIt))
+// or emit it
+failToDoSomething(onError.emit(emitter))
+
+// if doSomething invokes this generated callback with an error
+// handleIt will be called with that error, otherwise our 
+// anonymous function will be called with all remaining arguments
 doSomething(onError(handleIt).otherwise(function (message) {
     console.log('will see this: %s', message)
 }))
