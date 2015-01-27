@@ -15,6 +15,8 @@ Potentially reduce the number of branches needing tests.
 ## examples
 
 ```javascript
+var onError = require('on-error')
+
 // error handler
 function handleIt (err) {}
 
