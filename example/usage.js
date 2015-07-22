@@ -39,4 +39,5 @@ failToDoSomething(onError(handleIt).alsoWithError(function (err, message) {
 var emitter = new EventEmitter().on('error', console.log)
 failToDoSomething(onError.emit(emitter).otherwise(function (message) {
     // will not get here
+    console.log(message)
 }))
