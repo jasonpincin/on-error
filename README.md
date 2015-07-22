@@ -64,33 +64,33 @@ var onError = require('on-error')
 
 ### onError(cb)
 
-Returns a function that when called with a truthy first argument, will execute `cb` with said 
-argument.
+Returns a function that when called with a truthy first argument, will execute `cb` with said argument.
 
 ### onError.emit(emitter)
 
-Returns a function that when called with a truthy first argument, will emit `error` on the provided
-event `emitter` with said argument.
+Returns a function that when called with a truthy first argument, will emit `error` on the provided event `emitter` with said argument.
 
 ### onError(cb1).otherwise(cb2)
 
-Returns a function that when called with a truthy first argument, will execute `cb1` with said 
-argument. When executed with a non-truthy 1st argument, `cb2` will instead be executed with 
-the error argument stripped.
+Returns a function that when called with a truthy first argument, will execute `cb1` with said argument. When executed with a non-truthy 1st argument, `cb2` will instead be executed with the error argument stripped.
 
 `.otherwise` may also be chained from `onError.emit()`
 
+### onError(cb1).otherwiseWithError(cb2)
+
+Returns a function that when called with a truthy first argument, will execute `cb1` with said argument. When executed with a non-truthy 1st argument, `cb2` will instead be executed with the error argument in-tact.
+
+`.otherwiseWithError` may also be chained from `onError.emit()`
+
 ### onError(cb1).always(cb2)
 
-Returns a function that when called with a truthy first argument, will execute `cb1` with said 
-argument. In addition, `cb2` will always be executed with the error argument stripped.
+Returns a function that when called with a truthy first argument, will execute `cb1` with said argument. In addition, `cb2` will always be executed with the error argument stripped.
 
 `.always` may also be chained from `onError.emit()`
 
 ### onError(cb1).alwaysWithError(cb2)
 
-Returns a function that when called with a truthy first argument, will execute `cb1` with said 
-argument. In addition, `cb2` will always be executed with the error argument in-tact.
+Returns a function that when called with a truthy first argument, will execute `cb1` with said argument. In addition, `cb2` will always be executed with the error argument in-tact.
 
 `.alwaysWithError` may also be chained from `onError.emit()`
 
@@ -105,5 +105,4 @@ Specifying `--grep` will only run the test files that match the given pattern.
 
 `npm run coverage [--html]`
 
-This will output a textual coverage report. Including `--html` will also open 
-an HTML coverage report in the default browser.
+This will output a textual coverage report. Including `--html` will also open an HTML coverage report in the default browser.
