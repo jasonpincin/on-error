@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "make npm-test",
-    "view-cover": "make view-cover"
+    "coverage": "make npm-coverage"
   },
   "repository": {
     "type": "git",
@@ -30,11 +30,11 @@
   },
   "contributors": [],
   "devDependencies": {
-    "istanbul": "~0.2.8",
-    "jshint": "^2.5.10",
-    "tap-dot": "^0.2.2",
-    "tap-spec": "~0.1.9",
-    "tape": "~2.12.3"
+    "eslint": "~0.24.1",
+    "istanbul": "~0.3.17",
+    "tap-dot": "~1.0.0",
+    "tap-spec": "~4.0.2",
+    "tape": "~4.0.1"
   },
   "dependencies": {}
 }
