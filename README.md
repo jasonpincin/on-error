@@ -78,29 +78,32 @@ Returns a function that when called with a truthy first argument, will execute `
 argument. When executed with a non-truthy 1st argument, `cb2` will instead be executed with 
 the error argument stripped.
 
-`.otherwise` may always be chained from `onError.emit()`
+`.otherwise` may also be chained from `onError.emit()`
 
 ### onError(cb1).always(cb2)
 
 Returns a function that when called with a truthy first argument, will execute `cb1` with said 
 argument. In addition, `cb2` will always be executed with the error argument stripped.
 
-`.always` may always be chained from `onError.emit()`
+`.always` may also be chained from `onError.emit()`
 
 ### onError(cb1).alwaysWithError(cb2)
 
 Returns a function that when called with a truthy first argument, will execute `cb1` with said 
 argument. In addition, `cb2` will always be executed with the error argument in-tact.
 
-`.alwaysWithError` may always be chained from `onError.emit()`
+`.alwaysWithError` may also be chained from `onError.emit()`
 
 ## testing
 
-`npm test [--dot | --spec] [--coverage | --grep=pattern]`
+`npm test [--dot | --spec] [--grep=pattern]`
 
 Specifying `--dot` or `--spec` will change the output from the default TAP style. 
-Specifying `--coverage` will print a text coverage summary to the terminal after 
-tests have ran, while `--pattern` will only run the test files that match the given 
-pattern.
+Specifying `--grep` will only run the test files that match the given pattern.
 
-Open an html coverage report with `npm run view-cover`.
+## coverage
+
+`npm run coverage [--html]`
+
+This will output a textual coverage report. Including `--html` will also open 
+an HTML coverage report in the default browser.
