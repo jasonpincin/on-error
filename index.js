@@ -28,6 +28,14 @@ function decorated (errHandler) {
             return otherwiseCb.apply(this, Array.prototype.slice.call(arguments, 1))
         }
     }
+    errHandler.otherwiseWithError = function (otherwiseCb) {
+        assert(typeof otherwiseCb === 'function', 'on-error.otherwiseWithError requires a callback')
+
+        return function otherwiseHandler () {
+            if (arguments[0]) return errHandler(arguments[0])
+            return otherwiseCb.apply(this, arguments)
+        }
+    }
     errHandler.always = function (alwaysCb) {
         assert(typeof alwaysCb === 'function', 'on-error.always requires a callback')
 
