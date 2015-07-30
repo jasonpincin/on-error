@@ -11,8 +11,9 @@ test('on-error().alwaysWithError', function (t) {
 
 test('on-error().alwaysWithError when passed an error', function (t) {
     var emitter    = new EventEmitter,
-    emits      = [],
-    otherCalls = []
+        emits      = [],
+        otherCalls = []
+
     emitter.on('error', function (err) {
         emits.push(err)
     })
@@ -22,7 +23,8 @@ test('on-error().alwaysWithError when passed an error', function (t) {
         return true
     }
     var anError = new Error('error 1'),
-    handler = onError.emit(emitter).alwaysWithError(otherHandler)
+        handler = onError.emit(emitter).alwaysWithError(otherHandler)
+
     t.equals(handler(anError, 5, 10), true, 'should return true')
     t.equal(emits.length, 1, 'should invoke error handler')
     t.equal(otherCalls.length, 1, 'should invoke always handler')
@@ -33,8 +35,9 @@ test('on-error().alwaysWithError when passed an error', function (t) {
 
 test('on-error().alwaysWithError when passed no error', function (t) {
     var emitter    = new EventEmitter,
-    emits      = [],
-    otherCalls = []
+        emits      = [],
+        otherCalls = []
+
     emitter.on('error', function (err) {
         emits.push(err)
     })

@@ -13,7 +13,8 @@ test('on-error.emit', function (t) {
 
 test('on-error.emit when passed an error', function (t) {
     var emitter = new EventEmitter,
-    emits   = []
+        emits   = []
+
     emitter.on('error', function (err) {
         emits.push(err)
     })
@@ -26,7 +27,8 @@ test('on-error.emit when passed an error', function (t) {
 
 test('on-error.emit when passed no error', function (t) {
     var emitter = new EventEmitter,
-    emits   = []
+        emits   = []
+
     emitter.on('error', function (err) {
         emits.push(err)
     })

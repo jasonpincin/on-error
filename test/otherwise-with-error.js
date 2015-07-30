@@ -10,7 +10,8 @@ test('on-error().otherwiseWithError', function (t) {
 
 test('on-error().otherwiseWithError when passed an error', function (t) {
     var errorCalls = [],
-    otherCalls = []
+        otherCalls = []
+
     function errHandler () {
         var args = Array.prototype.slice.call(arguments, 0)
         errorCalls.push(args)
@@ -20,7 +21,8 @@ test('on-error().otherwiseWithError when passed an error', function (t) {
         otherCalls.push(args)
     }
     var anError = new Error('error 1'),
-    handler = onError(errHandler).otherwiseWithError(otherHandler)
+        handler = onError(errHandler).otherwiseWithError(otherHandler)
+
     t.notOk(handler(anError), 'should return undefined')
     t.equal(errorCalls.length, 1, 'should invoke error handler')
     t.equal(otherCalls.length, 0, 'should not invoke otherwise handler')
@@ -30,7 +32,8 @@ test('on-error().otherwiseWithError when passed an error', function (t) {
 
 test('on-error().otherwiseWithError when passed no error', function (t) {
     var errorCalls = [],
-    otherCalls = []
+        otherCalls = []
+
     function errHandler () {
         var args = Array.prototype.slice.call(arguments, 0)
         errorCalls.push(args)
