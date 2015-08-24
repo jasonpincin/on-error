@@ -9,6 +9,7 @@ test('on-error().otherwiseWithError', function (t) {
 })
 
 test('on-error().otherwiseWithError when passed an error', function (t) {
+    t.plan(4)
     var errorCalls = [],
         otherCalls = []
 
@@ -27,10 +28,11 @@ test('on-error().otherwiseWithError when passed an error', function (t) {
     t.equal(errorCalls.length, 1, 'should invoke error handler')
     t.equal(otherCalls.length, 0, 'should not invoke otherwise handler')
     t.equal(errorCalls[0][0], anError, 'should pass error to handler')
-    t.end()
 })
 
 test('on-error().otherwiseWithError when passed no error', function (t) {
+    t.plan(4)
+
     var errorCalls = [],
         otherCalls = []
 
@@ -48,6 +50,5 @@ test('on-error().otherwiseWithError when passed no error', function (t) {
     t.equal(errorCalls.length, 0, 'should not invoke error handler')
     t.equal(otherCalls.length, 1, 'should invoke otherwise handler')
     t.deepEqual(otherCalls[0], [null, 5, 10], 'should pass all args to otherwise handler')
-    t.end()
 })
 
