@@ -1,14 +1,14 @@
 var test    = require('tape'),
     onError = require('..')
 
-test('on-error().otherwise', function (t) {
+test('on-error().otherwise', function plan (t) {
     var h = function errHandler () {}
     t.equal(typeof onError(h).otherwise, 'function', 'should be a function')
     t.throws(onError(h).otherwise, 'requires a callback')
     t.end()
 })
 
-test('on-error().otherwise when passed an error', function (t) {
+test('on-error().otherwise when passed an error', function plan (t) {
     var errorCalls = [],
         otherCalls = []
 
@@ -30,7 +30,7 @@ test('on-error().otherwise when passed an error', function (t) {
     t.end()
 })
 
-test('on-error().otherwise when passed no error', function (t) {
+test('on-error().otherwise when passed no error', function plan (t) {
     var errorCalls = [],
         otherCalls = []
     function errHandler () {

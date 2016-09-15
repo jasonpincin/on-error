@@ -1,14 +1,13 @@
 var test    = require('tape'),
     onError = require('..')
 
-test('on-error', function (t) {
-
+test('on-error', function plan (t) {
     t.equal(typeof onError, 'function', 'should be a function')
     t.throws(onError, 'requires a callback')
     t.end()
 })
 
-test('on-error when passed an error', function (t) {
+test('on-error when passed an error', function plan (t) {
     var errorCalls = []
     function errHandler () {
         var args = Array.prototype.slice.call(arguments, 0)
@@ -21,7 +20,7 @@ test('on-error when passed an error', function (t) {
     t.end()
 })
 
-test('on-error when passed no error', function (t) {
+test('on-error when passed no error', function plan (t) {
     var errorCalls = []
     function errHandler () {
         var args = Array.prototype.slice.call(arguments, 0)

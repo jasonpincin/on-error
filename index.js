@@ -10,7 +10,7 @@ function onError (errCb) {
     }
     return decorated(errHandler)
 }
-onError.emit = function (emitter) {
+onError.emit = function emit (emitter) {
     assert(typeof emitter.emit === 'function', 'on-error.emit requires an EventEmitter')
 
     function errHandler () {
@@ -20,7 +20,7 @@ onError.emit = function (emitter) {
 }
 
 function decorated (errHandler) {
-    errHandler.otherwise = function (otherwiseCb) {
+    errHandler.otherwise = function otherwise (otherwiseCb) {
         assert(typeof otherwiseCb === 'function', 'on-error.otherwise requires a callback')
 
         return function otherwiseHandler () {
@@ -28,7 +28,7 @@ function decorated (errHandler) {
             return otherwiseCb.apply(this, Array.prototype.slice.call(arguments, 1))
         }
     }
-    errHandler.otherwiseWithError = function (otherwiseCb) {
+    errHandler.otherwiseWithError = function otherwiseWithError (otherwiseCb) {
         assert(typeof otherwiseCb === 'function', 'on-error.otherwiseWithError requires a callback')
 
         return function otherwiseHandler () {
@@ -36,7 +36,7 @@ function decorated (errHandler) {
             return otherwiseCb.apply(this, arguments)
         }
     }
-    errHandler.always = function (alwaysCb) {
+    errHandler.always = function always (alwaysCb) {
         assert(typeof alwaysCb === 'function', 'on-error.always requires a callback')
 
         return function alwaysHandler () {
@@ -44,7 +44,7 @@ function decorated (errHandler) {
             return alwaysCb.apply(this, Array.prototype.slice.call(arguments, 1))
         }
     }
-    errHandler.alwaysWithError = function (alwaysCb) {
+    errHandler.alwaysWithError = function alwaysWithError (alwaysCb) {
         assert(typeof alwaysCb === 'function', 'on-error.alwaysWithError requires a callback')
 
         return function alwaysHandler () {

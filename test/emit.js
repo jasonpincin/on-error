@@ -2,7 +2,7 @@ var test         = require('tape'),
     EventEmitter = require('events').EventEmitter,
     onError      = require('..')
 
-test('on-error.emit', function (t) {
+test('on-error.emit', function plan (t) {
     var emitter = new EventEmitter
 
     t.equal(typeof onError.emit, 'function', 'should be a function')
@@ -11,11 +11,11 @@ test('on-error.emit', function (t) {
     t.end()
 })
 
-test('on-error.emit when passed an error', function (t) {
+test('on-error.emit when passed an error', function plan (t) {
     var emitter = new EventEmitter,
         emits   = []
 
-    emitter.on('error', function (err) {
+    emitter.on('error', function onError (err) {
         emits.push(err)
     })
     var anError = new Error('error 1')
@@ -25,11 +25,11 @@ test('on-error.emit when passed an error', function (t) {
     t.end()
 })
 
-test('on-error.emit when passed no error', function (t) {
+test('on-error.emit when passed no error', function plan (t) {
     var emitter = new EventEmitter,
         emits   = []
 
-    emitter.on('error', function (err) {
+    emitter.on('error', function onError (err) {
         emits.push(err)
     })
     t.notOk(onError.emit(emitter)(null), 'should return undefined')

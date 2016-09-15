@@ -2,19 +2,19 @@ var test         = require('tape'),
     EventEmitter = require('events').EventEmitter,
     onError      = require('..')
 
-test('on-error().always', function (t) {
+test('on-error().always', function plan (t) {
     var h = function errHandler () {}
     t.equal(typeof onError(h).always, 'function', 'should be a function')
     t.throws(onError(h).always, 'requires a callback')
     t.end()
 })
 
-test('on-error().always when passed an error', function (t) {
+test('on-error().always when passed an error', function plan (t) {
     var emitter    = new EventEmitter,
         emits      = [],
         otherCalls = []
 
-    emitter.on('error', function (err) {
+    emitter.on('error', function onError (err) {
         emits.push(err)
     })
     function otherHandler () {
@@ -33,12 +33,12 @@ test('on-error().always when passed an error', function (t) {
     t.end()
 })
 
-test('on-error().always when passed no error', function (t) {
+test('on-error().always when passed no error', function plan (t) {
     var emitter    = new EventEmitter,
         emits      = [],
         otherCalls = []
 
-    emitter.on('error', function (err) {
+    emitter.on('error', function onError (err) {
         emits.push(err)
     })
     function otherHandler () {

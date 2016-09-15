@@ -28,27 +28,27 @@ failToDoSomething(onError.emit(emitter))
 // if doSomething invokes this generated callback with an error
 // handleIt will be called with that error, otherwise our 
 // anonymous function will be called with all remaining arguments
-doSomething(onError(handleIt).otherwise(function (message) {
+doSomething(onError(handleIt).otherwise(function otherwise (message) {
     console.log('will see this: %s', message)
 }))
 
-failToDoSomething(onError(handleIt).otherwise(function (message) {
+failToDoSomething(onError(handleIt).otherwise(function otherwise (message) {
     console.log('will NOT see this: %s', message)
 }))
 
 // if error handleIt, and always...
-failToDoSomething(onError(handleIt).always(function (message) {
+failToDoSomething(onError(handleIt).always(function otherwise (message) {
     console.log('will see this too: %s', message)
 }))
 
 // if error handleIt, and always (include error for always func)...
-failToDoSomething(onError(handleIt).alwaysWithError(function (err, message) {
+failToDoSomething(onError(handleIt).alwaysWithError(function always (err, message) {
     console.log('will see this too (with the error): %s, %s', err, message)
 }))
 
 // maybe we want to emit the error instead...
 var emitter = new EventEmitter().on('error', console.log)
-failToDoSomething(onError.emit(emitter).otherwise(function (message) {
+failToDoSomething(onError.emit(emitter).otherwise(function otherwise (message) {
     // will not get here
 }))
 

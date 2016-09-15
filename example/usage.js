@@ -17,27 +17,27 @@ function handleIt (err) {
 }
 
 // if error handleIt, otherwise...
-doSomething(onError(handleIt).otherwise(function (message) {
+doSomething(onError(handleIt).otherwise(function otherwise (message) {
     console.log('will see this: %s', message)
 }))
 
-failToDoSomething(onError(handleIt).otherwise(function (message) {
+failToDoSomething(onError(handleIt).otherwise(function otherwise (message) {
     console.log('will NOT see this: %s', message)
 }))
 
 // if error handleIt, and also...
-failToDoSomething(onError(handleIt).also(function (message) {
+failToDoSomething(onError(handleIt).also(function also (message) {
     console.log('will see this too: %s', message)
 }))
 
 // if error handleIt, and also (include error for also func)...
-failToDoSomething(onError(handleIt).alsoWithError(function (err, message) {
+failToDoSomething(onError(handleIt).alsoWithError(function also (err, message) {
     console.log('will see this too (with the error): %s, %s', err, message)
 }))
 
 // maybe we want to emit the error instead...
 var emitter = new EventEmitter().on('error', console.log)
-failToDoSomething(onError.emit(emitter).otherwise(function (message) {
+failToDoSomething(onError.emit(emitter).otherwise(function otherwise (message) {
     // will not get here
     console.log(message)
 }))
