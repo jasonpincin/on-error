@@ -26,19 +26,28 @@
   },
   "contributors": [],
   "devDependencies": {
-    "@jasonpincin/standard": "~5.0.0-7",
-    "istanbul": "~0.3.17",
+    "faucet": "0.0.1",
+    "lower-standard": "~8.0.0-1",
+    "nyc": "~8.1.0",
     "opn": "~1.0.2",
-    "tap-dot": "~1.0.0",
-    "tap-spec": "~4.1.0",
-    "tape": "~4.2.0",
-    "phantomjs": "~1.9.18",
-    "zuul": "~3.3.0"
+    "phantomjs-prebuilt": "~2.1.12",
+    "snazzy": "~4.0.1",
+    "tape": "~4.6.0",
+    "zuul": "~3.3.0",
+    "zuul-ngrok": "~4.0.0"
   },
-  "dependencies": {},
   "scripts": {
-    "test": "make npm-test",
-    "coverage": "make npm-coverage",
-    "browser-test": "make browser-test"
+    "test": "nyc -r html -r text npm run -s faucet && npm run -s lint && npm run -s check-cover",
+    "test-nocover": "npm run -s faucet && npm run -s lint",
+    "travis-test": "nyc npm run -s tap && npm run -s coveralls",
+    "browser-test": "zuul -- test/*.js",
+    "faucet": "tape test/*.js | faucet",
+    "tap": "tape test/*.js",
+    "phantom": "zuul --phantom -- test/*.js | faucet",
+    "lint": "standard | snazzy",
+    "check-cover": "nyc check-coverage --lines 100 --functions 100 --branches 100",
+    "coveralls": "((nyc report --reporter=text-lcov | coveralls) || exit 0)",
+    "view-cover": "nyc report --reporter=text",
+    "open-cover": "opn coverage/index.html"
   }
 }
