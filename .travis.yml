@@ -1,17 +1,17 @@
 sudo: false
 language: node_js
-node_js:
-- '0.10'
-- '0.12'
-- '4.0'
-before_install:
-- npm install -g npm@'>=2.9.1'
+matrix:
+  include:
+  - node_js: '0.12'
+  - node_js: '4'
+  - node_js: '5'
+  - node_js: '6'
+  - node_js: '6'
+    env: BROWSER=true
 before_script:
-- npm install -g coveralls@2.10.0
+- npm install -g coveralls@2.11.12
 script:
-- make travis-test
-- '[ "${TRAVIS_NODE_VERSION}" = "0.12" ] && travis_retry travis_wait make browser-test
-  || true'
+- '[ "${BROWSER}" = "true" ] && travis_retry travis_wait npm run browser-test || npm run -s travis-test'
 env:
   global:
   - secure: HI9fyjebg4TH1YRoBXVEZY8L+sYQUoB0LSL89cCw32M8LEFdrIk+lvvxaA00JPLk/yAlCr30bPLIJVPKA4u9CsitWvOURJtGQyGJKb33RWikEP3iatYRoc+anW+hlWMKCjygZN7087LLj+i+ETOMB9yKj7YUM8jU5fJJ28rh2QQ=
