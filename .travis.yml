@@ -11,8 +11,8 @@ matrix:
 before_script:
 - npm install -g coveralls@2.11.12
 script:
-- '[ "${BROWSER}" = "true" ] && travis_retry travis_wait npm run browser-test || npm
-  run -s travis-test'
+- if [[ "${BROWSER}" == "true" ]]; then travis_retry travis_wait npm run browser-test;
+  else npm run -s travis-test; fi
 env:
   global:
   - secure: HI9fyjebg4TH1YRoBXVEZY8L+sYQUoB0LSL89cCw32M8LEFdrIk+lvvxaA00JPLk/yAlCr30bPLIJVPKA4u9CsitWvOURJtGQyGJKb33RWikEP3iatYRoc+anW+hlWMKCjygZN7087LLj+i+ETOMB9yKj7YUM8jU5fJJ28rh2QQ=
