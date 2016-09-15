@@ -3,7 +3,7 @@
 [![NPM version](https://badge.fury.io/js/on-error.png)](http://badge.fury.io/js/on-error)
 [![Coverage Status](https://coveralls.io/repos/jasonpincin/on-error/badge.png?branch=master)](https://coveralls.io/r/jasonpincin/on-error?branch=master)
 [![Build Status](https://travis-ci.org/jasonpincin/on-error.svg?branch=master)](https://travis-ci.org/jasonpincin/on-error)
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/jp-project4.svg)](https://saucelabs.com/u/jp-project4)
+[![Sauce Test Status](https://saucelabs.com/buildstatus/jp-project4)](https://saucelabs.com/u/jp-project4)
 [![Sauce Test Matrix](https://saucelabs.com/browser-matrix/jp-project4.svg)](https://saucelabs.com/u/jp-project4)
 
 Generate error-first callback handlers naturally. 
